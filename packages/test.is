@@ -1,1 +1,12 @@
-aaa
+@echo off
+echo Installing Example Package in "%cd%"...
+echo Creating a folder named "ExamplePackage" here.
+mkdir "ExamplePackage"
+
+echo Creating a sample file inside ExamplePackage folder...
+echo This file was created by Example Package installer. > "ExamplePackage\readme.txt"
+
+echo Listing contents of the ExamplePackage folder:
+dir "ExamplePackage"
+
+echo Installation complete!
