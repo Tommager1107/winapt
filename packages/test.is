@@ -1,12 +1,54 @@
 @echo off
+setlocal enabledelayedexpansion
+
 echo Installing Example Package in "%cd%"...
-echo Creating a folder named "ExamplePackage" here.
+echo.
+
+rem Create ExamplePackage folder
 mkdir "ExamplePackage"
 
-echo Creating a sample file inside ExamplePackage folder...
-echo This file was created by Example Package installer. > "ExamplePackage\readme.txt"
+rem Function to simulate a progress bar
+:progressbar
+setlocal
+set "max=20"
+set /a "step=%1"
+set /a "percent=(step*100)/max"
+set /p "=[" <nul
+for /l %%i in (1,1,%step%) do set /p "=#" <nul
+for /l %%i in (%step%,1,%max%) do set /p "=." <nul
+set /p "=] %percent%%" <nul
+endlocal & set "progressBarDone=%percent%"
+echo.
+exit /b
 
-echo Listing contents of the ExamplePackage folder:
+echo Creating dummy EXE file...
+
+rem Simulate progress bar for creating EXE
+for /l %%i in (1,1,20) do (
+    timeout /t 0.1 >nul
+    call :progressbar %%i
+)
+
+rem Create dummy EXE file (empty file with .exe extension)
+echo This is a dummy executable file. > "ExamplePackage\dummy.exe"
+
+echo Creating dummy DLL file...
+
+rem Simulate progress bar for creating DLL
+for /l %%i in (1,1,20) do (
+    timeout /t 0.1 >nul
+    call :progressbar %%i
+)
+
+rem Create dummy DLL file (empty file with .dll extension)
+echo This is a dummy dll file. > "ExamplePackage\dummy.dll"
+
+echo.
+
+echo Listing files in ExamplePackage:
 dir "ExamplePackage"
 
+echo.
 echo Installation complete!
+
+pause
